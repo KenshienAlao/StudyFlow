@@ -1,0 +1,25 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  application:
+    name: backend
+
+  datasource:
+    url: ${DB_URL}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      data-source-properties:
+        sslmode: require
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: ${SERVER_PORT:8080}
+
+jwt:
+  secret: ${JWT_SECRET:studyflow-dev-secret-key-change-me-in-production-please}
+  access-expiration: ${JWT_ACCESS_EXPIRATION:900000} # 15 min
+  refresh-expiration: ${JWT_REFRESH_EXPIRATION:604800000} # 7 days
