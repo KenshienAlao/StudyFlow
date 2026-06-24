@@ -3,19 +3,10 @@ export type LoginInput = {
   password: string;
 };
 
-export const LoginDefaults = {
-  email: "",
-  password: "",
-} satisfies LoginInput;
-
-export type RegisterInput = {
-    email: string;
-    password: string;
+export type RegisterInput = LoginInput & {
     confirmPassword: string;
 }
 
-export const RegisterDefaults = {
-    email: "",
-    password: "",
-    confirmPassword: "",
-} satisfies RegisterInput;
+export type FirstTime = {
+    isFirstTime: boolean;
+}

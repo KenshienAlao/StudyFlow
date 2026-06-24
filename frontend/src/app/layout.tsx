@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ThemeProvider, NavbarProvider } from "@/provider";
 
 export default function RootLayout({
   children,
@@ -21,10 +22,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`h-full antialiased`}>
+    <html lang="en" className={`h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col">
         <QueryProvider>
-          {children}
+          <ThemeProvider>
+            <NavbarProvider>
+            {children}
+          </NavbarProvider>
+          </ThemeProvider>
         </QueryProvider>
         <ToastContainer position="top-center" autoClose={3000} hideProgressBar={true} closeOnClick={true} rtl={false} pauseOnFocusLoss={true} draggable={true} pauseOnHover={false} />
       </body>

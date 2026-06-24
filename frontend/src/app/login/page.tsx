@@ -12,8 +12,7 @@ export default function Login() {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
+    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
     const validate = LoginScheme.safeParse(data);
 
     if (!validate.success) {

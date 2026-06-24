@@ -6,4 +6,16 @@ export const API_ENDPOINTS = {
         RESET_PASSWORD: "/api/auth/reset-password",
         REFRESH: "/api/auth/refresh",
     },
+    PROFILE: {
+        GET: "/api/profile",
+        SETUP: "/api/profile/setup",
+        UPDATE: "/api/profile/update",
+    },
+    SUBJECT: {
+        GET: "/api/subject",
+        CREATE: "/api/subject/subjectCreate",
+        UPDATE: "/api/subject/subjectUpdate",
+        DELETE: "/api/subject/subjectDelete"
+    },
+    
 } as const;

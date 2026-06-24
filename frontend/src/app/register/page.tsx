@@ -12,8 +12,7 @@ export default function RegisterPage() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = new FormData(e.currentTarget);
-    const data = Object.fromEntries(form.entries());
+    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
     const validate = RegisterSchema.safeParse(data);
 
     if (!validate.success) {
@@ -38,10 +37,6 @@ export default function RegisterPage() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-1">
-            <label htmlFor="name" className="text-xs font-medium text-muted-foreground">Full Name</label>
-            <Input id="name" name="name" placeholder="e.g. Alex Rivera" required disabled={isPending} />
-          </div>
 
           <div className="space-y-1">
             <label htmlFor="email" className="text-xs font-medium text-muted-foreground">Email Address</label>

@@ -1,13 +1,13 @@
-package com.studyflow.backend.authentication.login;
+package com.studyflow.backend.authentication;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import com.studyflow.backend.model.UsersModel;
 
-@Repository
-interface LoginRepository extends JpaRepository<UsersModel, Long> {
+public interface UsersRepository extends JpaRepository<UsersModel, Long> {
+    boolean existsByEmail(String email);
+
     Optional<UsersModel> findByEmail(String email);
 }

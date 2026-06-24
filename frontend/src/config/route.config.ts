@@ -3,7 +3,8 @@ export const ROUTES = {
     LANDING_PAGE: "/",
     LOGIN: "/login",
     REGISTER: "/register",
-    DASHBOARD: "/dashboard",    
+    DASHBOARD: "/dashboard",
+    SETUP: "/setup",
 } as const;
 
 export const PUBLIC_ROUTES = [
