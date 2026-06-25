@@ -3,7 +3,6 @@ import axios, { AxiosError } from "axios";
 import { API_ENDPOINTS } from "@/config";
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -36,7 +35,6 @@ api.interceptors.response.use(
           API_ENDPOINTS.AUTH.REFRESH,
           {},
           {
-            baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080",
             withCredentials: true,
           },
         );
