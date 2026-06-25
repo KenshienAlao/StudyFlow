@@ -1,5 +1,6 @@
 import { ROUTES } from "@/config";
-import { ApiResponse, FirstTime } from "@/model";
+import { ApiResponse } from "@/model";
+import { FirstTime } from "@/validation";
 import { authService } from "@/service";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
