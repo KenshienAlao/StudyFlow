@@ -1,59 +1,54 @@
 import { ApiResponse } from "@/model";
-import { subjectService } from "@/service/subject.service"
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { subjectService } from "@/service/subject.service";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 export const subjectKey = {
-    subject: ["subject"] as const,
-}
+  subject: ["subject"] as const,
+};
 
 export function useGetSubject() {
-    return useQuery({
-        queryKey: subjectKey.subject,
-        queryFn: subjectService.get,
-        select: (res) => res.data ?? [],
-        retry: 1,
-        refetchOnWindowFocus: false,
-        staleTime: 1000 * 60 * 5, // 5 minutes
-    })
+  return useQuery({
+    queryKey: subjectKey.subject,
+    queryFn: subjectService.get,
+    select: (res) => res.data ?? [],
+    retry: 1,
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
 }
 
 export function useCreateSubject() {
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
-    return useMutation({
-        mutationFn: subjectService.create_subject,
-        onSuccess: (res: ApiResponse) => {
-            toast.success(res.message);
-            queryClient.setQueryData(subjectKey.subject, res.data)
-            queryClient.invalidateQueries({ queryKey: subjectKey.subject })
-        },
-        onError: (error: Error) => toast.error(error.message)
-    })
+  return useMutation({
+    mutationFn: subjectService.create_subject,
+    onSuccess: (res: ApiResponse) => {
+      toast.success(res.message);
+      queryClient.invalidateQueries({ queryKey: subjectKey.subject });
+    },
+  });
 }
 
 export function useUpdateSubject() {
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
-    return useMutation({
-        mutationFn: subjectService.update_subject,
-        onSuccess: (res: ApiResponse) => {
-            toast.success(res.message);
-            queryClient.setQueryData(subjectKey.subject, res.data);
-            queryClient.invalidateQueries({ queryKey: subjectKey.subject }); 
-        },
-        onError: (error: Error) => toast.error(error.message)
-    })
+  return useMutation({
+    mutationFn: subjectService.update_subject,
+    onSuccess: (res: ApiResponse) => {
+      toast.success(res.message);
+      queryClient.invalidateQueries({ queryKey: subjectKey.subject });
+    },
+  });
 }
 
 export function useDeleteSubject() {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: subjectService.delete_subject,
-        onSuccess: (res: ApiResponse) => {
-            toast.success(res.message);
-            queryClient.invalidateQueries({ queryKey: subjectKey.subject })
-        },
-        onError: (error: Error) => toast.error(error.message)
-    })
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: subjectService.delete_subject,
+    onSuccess: (res: ApiResponse) => {
+      toast.success(res.message);
+      queryClient.invalidateQueries({ queryKey: subjectKey.subject });
+    },
+  });
 }

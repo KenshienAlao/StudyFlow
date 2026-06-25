@@ -10,7 +10,7 @@ const NavbarContext = createContext<NavbarContextType | undefined>(undefined);
 export function NavbarProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
 
-  const toggle = () => setOpen(prev => !prev);
+  const toggle = () => setOpen((prev) => !prev);
 
   return (
     <NavbarContext.Provider value={{ open, toggle }}>

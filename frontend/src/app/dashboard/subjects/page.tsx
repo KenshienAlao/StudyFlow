@@ -1,23 +1,57 @@
 "use client";
 
 import { Structure } from "@/components";
-import { CreateSubjectModal, DeleteConfirmationModal, EditModal, EmptySubject, Error, Header, SubjectCard, SubjectLoader } from "@/components/subject";
-import { useCreateSubject, useDeleteSubject, useGetSubject, useUpdateSubject } from "@/hooks";
+import {
+  CreateSubjectModal,
+  DeleteConfirmationModal,
+  EditModal,
+  EmptySubject,
+  Error,
+  Header,
+  SubjectCard,
+  SubjectLoader,
+} from "@/components/subject";
+import {
+  useCreateSubject,
+  useDeleteSubject,
+  useGetSubject,
+  useUpdateSubject,
+} from "@/hooks";
 import { Subject } from "@/model";
-import { SubjectCreateSchema, SubjectDeleteSchema, SubjectUpdateSchema } from "@/validation";
+import {
+  SubjectCreateSchema,
+  SubjectDeleteSchema,
+  SubjectUpdateSchema,
+} from "@/validation";
 import { useState, FormEvent, useEffect } from "react";
 import { toast } from "react-toastify";
 
 export default function SubjectsPage() {
-  const { data: subjects, isPending: isGetSubjectPending, error: errorGetSubject } = useGetSubject();
-  const { mutate: createSubject, isPending: isCreateSubjectPending, error: errorCreateSubject } = useCreateSubject();
-  const { mutate: deleteSubject, isPending: isDeleteSubjectPending, error: errorDeleteSubject } = useDeleteSubject();
-  const { mutate: editSubject, isPending: isEditSubjectPending, error: errorEditSubject } = useUpdateSubject();
+  const {
+    data: subjects,
+    isPending: isGetSubjectPending,
+    error: errorGetSubject,
+  } = useGetSubject();
+  const {
+    mutate: createSubject,
+    isPending: isCreateSubjectPending,
+    error: errorCreateSubject,
+  } = useCreateSubject();
+  const {
+    mutate: deleteSubject,
+    isPending: isDeleteSubjectPending,
+    error: errorDeleteSubject,
+  } = useDeleteSubject();
+  const {
+    mutate: editSubject,
+    isPending: isEditSubjectPending,
+    error: errorEditSubject,
+  } = useUpdateSubject();
 
   const [isOpen, setIsOpen] = useState(false);
   const [subjectToEdit, setSubjectToEdit] = useState<Subject | null>(null);
   const [subjectToDelete, setSubjectToDelete] = useState<Subject | null>(null);
-  const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
+  const [activeMenuId, setActiveMenuId] = useState<number | null>(null);
 
   useEffect(() => {
     const handleOutsideClick = () => setActiveMenuId(null);
@@ -32,14 +66,14 @@ export default function SubjectsPage() {
     const data = Object.fromEntries(new FormData(e.currentTarget).entries());
     const validate = SubjectCreateSchema.safeParse(data);
     if (!validate.success) {
-        toast.error(validate.error.issues[0].message);
-        return;
+      toast.error(validate.error.issues[0].message);
+      return;
     }
-    
+
     createSubject(validate.data, {
-        onSuccess: () => {
-            setIsOpen(false);
-        }
+      onSuccess: () => {
+        setIsOpen(false);
+      },
     });
   };
 
@@ -54,15 +88,15 @@ export default function SubjectsPage() {
     deleteSubject(validate.data, {
       onSuccess: () => {
         setSubjectToDelete(null);
-      }
+      },
     });
   };
 
   const handleEditSubject = (e: FormEvent<HTMLFormElement>, id: number) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget).entries());
-    
-    const validate = SubjectUpdateSchema.safeParse({...data, id});
+
+    const validate = SubjectUpdateSchema.safeParse({ ...data, id });
     if (!validate.success) {
       toast.error(validate.error.issues[0].message);
       return;
@@ -71,27 +105,31 @@ export default function SubjectsPage() {
     editSubject(validate.data, {
       onSuccess: () => {
         setSubjectToEdit(null);
-      }
+      },
     });
-  }
+  };
 
   return (
     <Structure>
       <div className="space-y-8 select-none">
-        <Header setIsOpen={setIsOpen} />        
-        {errorGetSubject && (
-          <Error error={errorGetSubject} />
-        )}
+        <Header setIsOpen={setIsOpen} />
+        {errorGetSubject && <Error error={errorGetSubject} />}
 
         {isGetSubjectPending ? (
           <SubjectLoader />
-        ) : subjects?.length === 0 ? (
-          <EmptySubject setIsOpen={setIsOpen} />
+        ) : subjects && subjects?.length > 0 ? (
+          <SubjectCard
+            subjects={subjects}
+            activeMenuId={activeMenuId}
+            setActiveMenuId={setActiveMenuId}
+            setSubjectToEdit={setSubjectToEdit}
+            setSubjectToDelete={setSubjectToDelete}
+          />
         ) : (
-          <SubjectCard subjects={subjects ?? []} activeMenuId={activeMenuId} setActiveMenuId={setActiveMenuId} setSubjectToEdit={setSubjectToEdit} setSubjectToDelete={setSubjectToDelete} />
+          <EmptySubject setIsOpen={setIsOpen} />
         )}
 
-        <CreateSubjectModal 
+        <CreateSubjectModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           isCreateSubjectPending={isCreateSubjectPending}
@@ -111,8 +149,9 @@ export default function SubjectsPage() {
           subjectToEdit={subjectToEdit}
           setSubjectToEdit={setSubjectToEdit}
           handleEditSubject={handleEditSubject}
+          isEditSubjectPending={isEditSubjectPending}
+          errorEditSubject={errorEditSubject}
         />
-
       </div>
     </Structure>
   );

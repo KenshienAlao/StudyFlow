@@ -3,6 +3,14 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  compiler: {
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? {
+            exclude: ["error"],
+          }
+        : false,
+  },
   images: {
     remotePatterns: [
       {
@@ -15,10 +23,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "plus.unsplash.com"
-      }
-    ]
-  }
+        hostname: "plus.unsplash.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

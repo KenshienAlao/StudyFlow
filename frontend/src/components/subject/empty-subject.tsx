@@ -12,7 +12,7 @@ export function EmptySubject({setIsOpen}: {setIsOpen: (open: boolean) => void}) 
               Create your first subject track to organize your workspace modules and study workflows.
             </p>
             <Button onClick={() => setIsOpen(true)} variant="outline" className="border-border hover:bg-muted/50">
-              <Plus className="w-4 h-4 mr-2" /> Start Framing Profile
+              <Plus className="w-4 h-4 mr-2" /> Create Subject
             </Button>
           </div>
     )

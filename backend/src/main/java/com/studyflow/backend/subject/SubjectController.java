@@ -44,4 +44,5 @@ class SubjectController {
     public ResponseEntity<ApiResponse<SubjectDto>> subjectDelete(@Valid @PathVariable Long id) {
         return ResponseEntity.ok(ApiResponse.success("Subject deleted successfully", subjectService.subjectDelete(id)));
     }
+
 }
