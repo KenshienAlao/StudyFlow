@@ -29,8 +29,7 @@ class RefreshController {
 
         var accessToken = jwtTokenConfig.generateAccessToken(jwtTokenConfig.extractEmail(cookie.getValue()));
         response.addHeader(HttpHeaders.SET_COOKIE, ResponseCookie.from("access_token", accessToken)
-                .httpOnly(true).secure(true).path("/").maxAge(900).sameSite("None").build().toString());
-
+                .httpOnly(true).secure(true).path("/").maxAge(900).sameSite("None").build().toString() + "; Partitioned");
         return ApiResponse.success("Token refreshed.", null);
     }
 }

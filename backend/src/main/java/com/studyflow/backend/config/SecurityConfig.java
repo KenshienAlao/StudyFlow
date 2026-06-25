@@ -70,7 +70,7 @@ public class SecurityConfig {
     // CORS
     @Bean
     CorsConfigurationSource corsConfigurationSource(
-            @org.springframework.beans.factory.annotation.Value("${cors.allowed-origins:http://localhost:3000,http://localhost:5174}") String[] allowedOrigins) {
+            @org.springframework.beans.factory.annotation.Value("${cors.allowed-origins}") String[] allowedOrigins) {
 
         org.springframework.web.cors.CorsConfiguration config = new org.springframework.web.cors.CorsConfiguration();
         config.setAllowedOrigins(java.util.List.of(allowedOrigins));

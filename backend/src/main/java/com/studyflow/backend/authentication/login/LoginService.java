@@ -40,6 +40,6 @@ class LoginService {
 
     private void setCookie(String name, String value, long maxAge) {
         response.addHeader(HttpHeaders.SET_COOKIE, ResponseCookie.from(name, value)
-                .httpOnly(true).secure(true).path("/").maxAge(maxAge).sameSite("None").build().toString());
+                .httpOnly(true).secure(true).path("/").maxAge(maxAge).sameSite("None").build().toString() + "; Partitioned");
     }
 }

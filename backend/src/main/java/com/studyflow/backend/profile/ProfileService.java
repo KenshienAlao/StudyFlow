@@ -58,7 +58,7 @@ class ProfileService {
 
                 response.addHeader(HttpHeaders.SET_COOKIE, ResponseCookie.from("is_first_time", "false")
                                 .httpOnly(true).secure(true).path("/").maxAge(604800).sameSite("None").build()
-                                .toString());
+                                .toString() + "; Partitioned");
 
                 return new ProfileDto(
                                 email,
