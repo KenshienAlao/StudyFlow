@@ -1,46 +1,28 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse as Res } from "next/server";
 import { PUBLIC_ROUTES } from "./config";
 
 export function proxy(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+  const { nextUrl: url, cookies: c } = req;
+  const p = url.pathname;
 
-  if (req.nextUrl.searchParams.get("clear_session") === "true") {
-    const url = new URL("/login", req.url);
-    url.searchParams.delete("clear_session");
-    const response = NextResponse.redirect(url);
-    response.cookies.delete("access_token");
-    response.cookies.delete("refresh_token");
-    return response;
+  if (url.searchParams.get("clear_session") === "true") {
+    const res = Res.redirect(new URL("/", url));
+    res.cookies.delete("access_token");
+    res.cookies.delete("refresh_token");
+    return res;
   }
 
-  const authenticated =
-    req.cookies.has("access_token") || req.cookies.has("refresh_token");
-
-  const publicRoute = PUBLIC_ROUTES.some((route) =>
-    route === "/" ? pathname === "/" : pathname.startsWith(route),
+  const auth = c.has("access_token") || c.has("refresh_token");
+  const pub = PUBLIC_ROUTES.some((r) =>
+    r === "/" ? p === "/" : p.startsWith(r),
   );
 
-  const isFirstTime = req.cookies.get("is_first_time")?.value === "true";
+  if (!auth) return pub ? Res.next() : Res.redirect(new URL("/", url));
+  if (c.get("is_first_time")?.value === "true")
+    return p === "/setup" ? Res.next() : Res.redirect(new URL("/setup", url));
+  if (pub || p === "/setup") return Res.redirect(new URL("/dashboard", url));
 
-  // Unauthenticated user => landing page
-  if (!authenticated) {
-    return publicRoute
-      ? NextResponse.next()
-      : NextResponse.redirect(new URL("/", req.url));
-  }
-
-  // Authenticated user who is first time => setup page
-  if (isFirstTime) {
-    return pathname === "/setup"
-      ? NextResponse.next()
-      : NextResponse.redirect(new URL("/setup", req.url));
-  }
-
-  return publicRoute || pathname === "/setup"
-    ? NextResponse.redirect(new URL("/dashboard", req.url))
-    : NextResponse.next();
+  return Res.next();
 }
 
-export const config = {
-  matcher: ["/((?!api|_next|favicon.ico).*)"],
-};
+export const config = { matcher: ["/((?!api|_next|favicon.ico).*)"] };
