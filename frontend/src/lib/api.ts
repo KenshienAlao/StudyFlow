@@ -24,24 +24,31 @@ api.interceptors.response.use(
     const req = error.config as typeof error.config & { _retry?: boolean };
 
     // auto token refresh: on 401/403, silently get a new access_token and replay the original request
-    if ((error.response?.status === 401 || error.response?.status === 403) && req && !req._retry) {
+    if (
+      (error.response?.status === 401 || error.response?.status === 403) &&
+      req &&
+      !req._retry
+    ) {
       req._retry = true; // prevents infinite retry loop
 
       try {
         await axios.post(
           API_ENDPOINTS.AUTH.REFRESH,
           {},
-          { baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080", withCredentials: true }
+          {
+            baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080",
+            withCredentials: true,
+          },
         );
 
         return api(req);
       } catch {
         // refresh token also expired → force logout
-        window.location.href = "/login";
+        window.location.href = "/login?clear_session=true";
       }
     }
 
     // extract backend error message, fallback to axios message
     throw new Error(error.response?.data?.message ?? error.message);
-  }
+  },
 );
