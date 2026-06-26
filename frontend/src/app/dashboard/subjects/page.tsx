@@ -130,8 +130,8 @@ export default function SubjectsPage() {
         )}
 
         <CreateSubjectModal
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
+          isModalOpen={isOpen}
+          setIsModalOpen={setIsOpen}
           isCreateSubjectPending={isCreateSubjectPending}
           errorCreateSubject={errorCreateSubject}
           handleCreateSubject={handleCreateSubject}

@@ -17,4 +17,10 @@ export const API_ENDPOINTS = {
     UPDATE: "/api/subject/subjectUpdate",
     DELETE: "/api/subject/subjectDelete",
   },
+  TASK: {
+    GET: "/api/task",
+    CREATE: "/api/task/taskCreate",
+    UPDATE: "/api/task/taskUpdate",
+    DELETE: "/api/task/taskDelete",
+  },
 } as const;

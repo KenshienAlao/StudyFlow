@@ -1,4 +1,4 @@
-import { Plus, GraduationCap } from "lucide-react";
+import { Plus, FolderKanban } from "lucide-react";
 import { Button } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
@@ -10,12 +10,12 @@ export function Header({ setIsOpen }: { setIsOpen: (open: boolean) => void }) {
       <div className="space-y-2.5 relative z-10">
         <div className="flex flex-wrap items-center gap-2.5">
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground font-display">
-            Subjects
+            Task Workspace
           </h1>
         </div>
         <p className="text-xs sm:text-sm text-muted-foreground max-w-xl font-body leading-relaxed">
-          Manage your academic subjects, assign structural categories, and
-          evaluate target milestone performance indicators.
+          Optimize workflow execution, monitor priority items, and track live
+          milestones within active operational branches.
         </p>
       </div>
 
@@ -29,7 +29,7 @@ export function Header({ setIsOpen }: { setIsOpen: (open: boolean) => void }) {
         )}
       >
         <Plus className="w-4 h-4 transition-transform group-hover:rotate-90" />
-        Create Subject
+        Create Task
       </Button>
     </div>
   );

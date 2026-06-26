@@ -17,9 +17,10 @@ export function Structure({ children }: DashboardLayoutProps) {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <main className={cn("transition-all duration-300", open ? "ml-64" : "ml-20")}>
-
-      {/* profile soon */}
+      <main
+        className={cn("transition-all duration-300", open ? "ml-64" : "ml-20")}
+      >
+        {/* profile soon */}
 
         {/* Content */}
         <div className="p-8">{children}</div>

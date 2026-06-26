@@ -27,6 +27,7 @@ export function useCreateSubject() {
       toast.success(res.message);
       queryClient.invalidateQueries({ queryKey: subjectKey.subject });
     },
+    onError: (err: Error) => console.error(err),
   });
 }
 
@@ -39,6 +40,7 @@ export function useUpdateSubject() {
       toast.success(res.message);
       queryClient.invalidateQueries({ queryKey: subjectKey.subject });
     },
+    onError: (err: Error) => console.error(err),
   });
 }
 
@@ -50,5 +52,6 @@ export function useDeleteSubject() {
       toast.success(res.message);
       queryClient.invalidateQueries({ queryKey: subjectKey.subject });
     },
+    onError: (err: Error) => console.error(err),
   });
 }

@@ -1,14 +1,6 @@
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  Input,
-} from "@/components/ui";
+import { Input, Button, Modal } from "@/components/ui";
 import { Subject } from "@/model";
-import { AlertCircle, Loader2 } from "lucide-react";
+import { AlertCircle, Loader2, Edit2 } from "lucide-react";
 import { FormEvent } from "react";
 
 export interface EditModalProps {
@@ -27,35 +19,33 @@ export function EditModal({
   errorEditSubject,
 }: EditModalProps) {
   return (
-    <Dialog
-      open={!!subjectToEdit}
-      onOpenChange={(open) =>
-        !open && !isEditSubjectPending && setSubjectToEdit(null)
-      }
+    <Modal
+      isOpen={!!subjectToEdit}
+      onClose={() => setSubjectToEdit(null)}
+      title="Edit Subject Details"
+      icon={<Edit2 className="size-3" />}
+      disabled={isEditSubjectPending}
     >
-      <DialogContent className="max-w-md rounded-2xl border-border/60 bg-card p-6 shadow-2xl">
-        <form onSubmit={(e) => handleEditSubject(e, Number(subjectToEdit?.id))}>
-          <DialogHeader>
-            <DialogTitle className="text-xl font-bold tracking-tight">
-              Edit Subject Details
-            </DialogTitle>
-            <DialogDescription className="text-sm text-muted-foreground">
-              Update parameters for your chosen study category module.
-            </DialogDescription>
-          </DialogHeader>
+      <div className="p-4 sm:p-5">
+        <div className="text-sm text-muted-foreground mb-4">
+          Update parameters for your chosen study category module.
+        </div>
+        {errorEditSubject && (
+          <div className="p-3 mb-4 bg-destructive/10 border border-destructive/20 rounded-xl text-destructive text-xs font-medium flex gap-2 items-center">
+            <AlertCircle className="w-4 h-4" />
+            <span>
+              {errorEditSubject.message || "Failed to update subject."}
+            </span>
+          </div>
+        )}
 
-          {errorEditSubject && (
-            <div className="mt-4 p-3 bg-destructive/10 border border-destructive/20 rounded-xl text-destructive text-xs font-medium flex gap-2 items-center">
-              <AlertCircle className="w-4 h-4" />
-              <span>
-                {errorEditSubject.message || "Failed to update subject."}
-              </span>
-            </div>
-          )}
-
-          <div className="space-y-5 pt-4">
+        <form
+          onSubmit={(e) => handleEditSubject(e, Number(subjectToEdit?.id))}
+          className="space-y-4"
+        >
+          <fieldset disabled={isEditSubjectPending} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1.5">
+              <label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-1.5 block">
                 Subject Name
               </label>
               <Input
@@ -63,68 +53,63 @@ export function EditModal({
                 defaultValue={subjectToEdit?.name}
                 placeholder="e.g., Data Structures and Algorithms"
                 required
-                disabled={isEditSubjectPending}
-                className="h-10 border-border/80 focus:border-primary placeholder:text-muted-foreground/50"
+                className="h-9.5 border-border/60 bg-muted/10 text-xs shadow-xs transition-colors focus-visible:bg-transparent"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1.5">
+              <label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-1.5 block">
                 Description
               </label>
               <Input
                 name="description"
                 defaultValue={subjectToEdit?.description}
                 placeholder="e.g., Analysis of runtime complexities, core fundamental structures, and optimization methods"
-                disabled={isEditSubjectPending}
-                className="h-10 border-border/80 focus:border-primary placeholder:text-muted-foreground/50"
+                className="h-9.5 border-border/60 bg-muted/10 text-xs shadow-xs transition-colors focus-visible:bg-transparent"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">
+              <label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-2 block">
                 Accent Color
               </label>
-              <div className="flex items-center gap-3 bg-muted/40 border border-border/60 rounded-xl p-3">
+              <div className="flex items-center gap-3 bg-muted/10 border border-border/60 rounded-md p-3">
                 <input
                   type="color"
                   name="color"
                   defaultValue={subjectToEdit?.color || "#6FAF8F"}
-                  disabled={isEditSubjectPending}
-                  className="w-10 h-10 rounded-lg border border-border/80 bg-transparent cursor-pointer overflow-hidden shrink-0"
+                  className="w-8 h-8 rounded border border-border/80 bg-transparent cursor-pointer overflow-hidden shrink-0"
                 />
-                <div className="text-xs text-muted-foreground leading-normal">
+                <div className="text-[11px] text-muted-foreground leading-normal">
                   Choose a unique color to make the card indicators easier to
                   see.
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="mt-6 pt-3 border-t border-border/60 flex items-center justify-end gap-3">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setSubjectToEdit(null)}
-              disabled={isEditSubjectPending}
-              className="h-10 border-border"
-            >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              disabled={isEditSubjectPending}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-md shadow-primary/10 h-10 px-5 font-semibold flex items-center gap-2 min-w-[140px] justify-center"
-            >
-              {isEditSubjectPending ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : (
-                "Save Changes"
-              )}
-            </Button>
-          </div>
+            <div className="mt-5 flex items-center justify-end gap-2.5 border-t border-border/40 pt-3">
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => setSubjectToEdit(null)}
+                className="h-9 rounded-md border border-border/40 px-4 text-xs font-semibold text-muted-foreground hover:bg-muted/40 hover:text-foreground"
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                className="flex h-9 items-center gap-1.5 rounded-md px-4 text-xs font-semibold shadow-xs active:scale-[0.98]"
+              >
+                {isEditSubjectPending ? (
+                  <Loader2 className="w-3 h-3 animate-spin" />
+                ) : (
+                  "Save Changes"
+                )}
+              </Button>
+            </div>
+          </fieldset>
         </form>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </Modal>
   );
 }

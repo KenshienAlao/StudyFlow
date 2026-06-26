@@ -39,6 +39,10 @@ public class UsersModel {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<SubjectModel> subjects;
 
+    // task
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<TaskModel> tasks;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

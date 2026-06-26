@@ -1,31 +1,29 @@
 import { AlertCircle, Loader2, Trash2 } from "lucide-react";
 import { Button, Modal } from "@/components/ui";
-import { Subject } from "@/model";
+import { Task } from "@/model";
 
 export interface DeleteConfirmationModalProps {
-  subjectToDelete: Subject | null;
-  isDeleteSubjectPending: boolean;
-  errorDeleteSubject: Error | null;
-  setSubjectToDelete: (subjectToDelete: Subject | null) => void;
+  openDeleteTask: Task | null;
+  setOpenDeleteTask: (openDeleteTask: Task | null) => void;
+  isDeleteTaskPending: boolean;
+  errorDeleteTask: Error | null;
   handleConfirmDelete: (id: number) => void;
 }
 
-export function DeleteConfirmationModal({
-  subjectToDelete,
-  isDeleteSubjectPending,
-  errorDeleteSubject,
-  setSubjectToDelete,
+export function DeleteTaskModal({
+  openDeleteTask,
+  setOpenDeleteTask,
+  isDeleteTaskPending,
+  errorDeleteTask,
   handleConfirmDelete,
 }: DeleteConfirmationModalProps) {
-  const themeColor = subjectToDelete?.color || "#6b7280";
-
   return (
     <Modal
-      isOpen={!!subjectToDelete}
-      onClose={() => setSubjectToDelete(null)}
-      title="Delete Subject"
+      isOpen={!!openDeleteTask}
+      onClose={() => setOpenDeleteTask(null)}
+      title="Delete Task"
       icon={<Trash2 className="size-3" />}
-      disabled={isDeleteSubjectPending}
+      disabled={isDeleteTaskPending}
     >
       <div className="p-4 sm:p-5">
         <div className="text-sm text-muted-foreground mb-4">
@@ -33,23 +31,18 @@ export function DeleteConfirmationModal({
         </div>
 
         <div className="flex items-center gap-3 p-3 mb-4 rounded-xl bg-muted/10 border border-border/60">
-          <div
-            className="w-2.5 h-2.5 rounded-full shrink-0"
-            style={{ backgroundColor: themeColor }}
-          />
+          <div className="w-2.5 h-2.5 rounded-full shrink-0" />
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-foreground truncate mt-0.5">
-              {subjectToDelete?.name}
+              {openDeleteTask?.title}
             </p>
           </div>
         </div>
 
-        {errorDeleteSubject && (
+        {errorDeleteTask && (
           <div className="p-3 mb-4 bg-destructive/10 border border-destructive/20 rounded-xl text-destructive text-xs font-medium flex gap-2 items-center">
             <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-            <span className="leading-normal">
-              {errorDeleteSubject.message || "Failed to remove subject."}
-            </span>
+            <span className="leading-normal">{errorDeleteTask.message}</span>
           </div>
         )}
 
@@ -57,20 +50,20 @@ export function DeleteConfirmationModal({
           <Button
             type="button"
             variant="ghost"
-            onClick={() => setSubjectToDelete(null)}
-            disabled={isDeleteSubjectPending}
+            onClick={() => setOpenDeleteTask(null)}
+            disabled={isDeleteTaskPending}
             className="h-9 rounded-md border border-border/40 px-4 text-xs font-semibold text-muted-foreground hover:bg-muted/40 hover:text-foreground"
           >
             Cancel
           </Button>
           <Button
             type="button"
-            onClick={() => handleConfirmDelete(Number(subjectToDelete?.id))}
-            disabled={isDeleteSubjectPending}
+            onClick={() => handleConfirmDelete(Number(openDeleteTask?.id))}
+            disabled={isDeleteTaskPending}
             variant="destructive"
             className="flex h-9 items-center gap-1.5 rounded-md px-4 text-xs font-semibold shadow-xs active:scale-[0.98]"
           >
-            {isDeleteSubjectPending ? (
+            {isDeleteTaskPending ? (
               <Loader2 className="w-3 h-3 animate-spin" />
             ) : (
               "Confirm"

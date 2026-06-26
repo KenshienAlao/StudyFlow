@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,9 +24,9 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "subject")
-public class SubjectModel {
-
+@Table(name = "tasks")
+public class TaskModel {
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UsersModel user;
@@ -36,15 +35,23 @@ public class SubjectModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    @NotBlank
-    private String name;
+    @Column(nullable = true)
+    private String title;
 
     @Column(nullable = true)
-    private String color;
+    private String subject;
 
     @Column(nullable = true)
-    private String description;
+    private String notes;
+
+    @Column(nullable = true)
+    private String dueDate;
+
+    @Column(nullable = true)
+    private String priority;
+
+    @Column(nullable = true)
+    private String status;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
@@ -53,4 +60,6 @@ public class SubjectModel {
     @UpdateTimestamp
     @Column(nullable = true)
     private String updatedAt;
+
+    
 }
