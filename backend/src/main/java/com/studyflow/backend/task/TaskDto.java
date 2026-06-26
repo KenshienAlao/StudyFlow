@@ -1,5 +1,7 @@
 package com.studyflow.backend.task;
 
+import jakarta.validation.constraints.NotNull;
+
 record TaskDto(
     Long id,
     String title,
@@ -21,7 +23,7 @@ record TaskDto(
     }
 
     public record Update(
-        Long id,
+        @NotNull Long id,
         String title,
         String subject,
         String notes,

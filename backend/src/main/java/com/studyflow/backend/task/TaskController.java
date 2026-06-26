@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.studyflow.backend.common.ApiResponse;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -34,7 +35,7 @@ class TaskController {
     }
 
     @PatchMapping("/taskUpdate")
-    public ResponseEntity<ApiResponse<TaskDto>> update(@RequestBody TaskDto.Update entity) {
+    public ResponseEntity<ApiResponse<TaskDto>> update(@Valid @RequestBody TaskDto.Update entity) {
         return ResponseEntity.ok(ApiResponse.success("Task updated successfully", taskService.update(entity)));
     }
 

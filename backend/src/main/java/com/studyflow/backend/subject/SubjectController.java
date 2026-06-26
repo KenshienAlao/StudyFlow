@@ -41,8 +41,9 @@ class SubjectController {
     }
 
     @DeleteMapping("/subjectDelete/{id}")
-    public ResponseEntity<ApiResponse<SubjectDto>> subjectDelete(@Valid @PathVariable Long id) {
-        return ResponseEntity.ok(ApiResponse.success("Subject deleted successfully", subjectService.subjectDelete(id)));
+    public ResponseEntity<ApiResponse<SubjectDto>> subjectDelete(@PathVariable Long id) {
+        subjectService.subjectDelete(id);
+        return ResponseEntity.ok(ApiResponse.success("Subject deleted successfully", null));
     }
 
 }

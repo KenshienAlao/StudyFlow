@@ -65,15 +65,7 @@ class SubjectService {
                                 subject.getDescription());
         }
 
-        public SubjectDto subjectDelete(Long id) {
-                var email = SecurityContextHolder.getContext().getAuthentication().getName();
-                var subject = subjectRepository.findByIdAndUserEmail(id, email)
-                                .orElseThrow(() -> new IllegalArgumentException("Subject not found"));
-                subjectRepository.delete(subject);
-                return new SubjectDto(
-                                subject.getId(),
-                                subject.getName(),
-                                subject.getColor(),
-                                subject.getDescription());
+        public void subjectDelete(Long id) {
+                subjectRepository.deleteByIdAndUserEmail(id, SecurityContextHolder.getContext().getAuthentication().getName());
         }
 }
