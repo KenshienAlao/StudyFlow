@@ -1,11 +1,11 @@
-import { ROUTES } from "@/config";
-import { ApiResponse } from "@/model";
-import { profileService } from "@/service";
+import { ROUTES } from "@/config/route.config";
+import { ApiResponse } from "@/model/api.model";
+import { profileService } from "@/service/profile.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-export const profileKeys = {
+const profileKeys = {
   profile: ["profile"] as const,
 };
 

@@ -1,21 +1,13 @@
 import z from "zod";
 
 export const LoginScheme = z.object({
-  email: z
-    .string()
-    .email("Invalid email address")
-    .trim()
-    .min(1, "Email is required"),
+  email: z.email("Invalid email address").trim().min(1, "Email is required"),
   password: z.string().trim().min(1, "Password is required"),
 });
 
 export const RegisterSchema = z
   .object({
-    email: z
-      .string()
-      .email("Invalid email address")
-      .trim()
-      .min(1, "Email is required"),
+    email: z.email("Invalid email address").trim().min(1, "Email is required"),
     password: z
       .string()
       .trim()
@@ -28,7 +20,7 @@ export const RegisterSchema = z
     path: ["confirmPassword"],
   });
 
-export const FirstTimeSchema = z.object({
+const FirstTimeSchema = z.object({
   isFirstTime: z.boolean(),
 });
 

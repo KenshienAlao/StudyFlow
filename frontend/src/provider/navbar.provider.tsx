@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+"use client";
+import { createContext, ReactNode, use, useState } from "react";
 
 type NavbarContextType = {
   open: boolean;
@@ -20,7 +21,7 @@ export function NavbarProvider({ children }: { children: ReactNode }) {
 }
 
 export function useNavbar() {
-  const ctx = useContext(NavbarContext);
+  const ctx = use(NavbarContext);
   if (!ctx) throw new Error("useNavbar must be inside NavbarProvider");
   return ctx;
 }

@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { cn } from "@/lib";
-import { Task } from "@/model";
+import { cn } from "@/lib/utils";
+import { Task } from "@/model/task.model";
 import {
   AlertCircle,
-  ArrowUpRight,
   Clock,
   Inbox,
   Loader2,

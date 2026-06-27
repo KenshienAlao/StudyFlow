@@ -1,7 +1,11 @@
-import { api } from "@/lib";
-import { ApiResponse } from "@/model";
-import { API_ENDPOINTS } from "@/config";
-import { FirstTime, LoginInput, RegisterInput } from "@/validation";
+import api from "@/lib/api";
+import { API_ENDPOINTS } from "@/config/api.config";
+import { ApiResponse } from "@/model/api.model";
+import {
+  FirstTime,
+  LoginInput,
+  RegisterInput,
+} from "@/validation/auth.validation";
 
 export const authService = {
   register: (data: RegisterInput) =>

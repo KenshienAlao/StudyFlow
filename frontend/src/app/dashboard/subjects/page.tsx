@@ -1,28 +1,26 @@
 "use client";
 
-import { Structure } from "@/components";
-import {
-  CreateSubjectModal,
-  DeleteConfirmationModal,
-  EditModal,
-  EmptySubject,
-  Error,
-  Header,
-  SubjectCard,
-  SubjectLoader,
-} from "@/components/subject";
+import { Structure } from "@/components/structure";
+import { CreateSubjectModal } from "@/components/subject/create-subject.modal";
+import { DeleteConfirmationModal } from "@/components/subject/delete-confirmation.modal";
+import { EditModal } from "@/components/subject/edit.modal";
+import { EmptySubject } from "@/components/subject/empty-subject";
+import { Error } from "@/components/subject/error-subject";
+import { Header } from "@/components/subject/header-subject";
+import { SubjectCard } from "@/components/subject/subject";
+import { SubjectLoader } from "@/components/subject/subject-loader";
 import {
   useCreateSubject,
   useDeleteSubject,
   useGetSubject,
   useUpdateSubject,
-} from "@/hooks";
-import { Subject } from "@/model";
+} from "@/hooks/use-subject";
+import { Subject } from "@/model/subject.model";
 import {
   SubjectCreateSchema,
   SubjectDeleteSchema,
   SubjectUpdateSchema,
-} from "@/validation";
+} from "@/validation/subject.validation";
 import { useState, FormEvent, useEffect } from "react";
 import { toast } from "react-toastify";
 

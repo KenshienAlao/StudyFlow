@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useNavbar } from "@/provider";
-import { cn } from "@/lib";
+import { cn } from "@/lib/utils";
 import { Menu, Settings, LogOut } from "lucide-react";
-import { NAV_ITEMS, navItems } from "@/config";
-
+import { useNavbar } from "@/provider/navbar.provider";
+import { NAV_ITEMS, navItems } from "@/config/nav.config";
+import Image from "next/image";
 export function Navbar() {
   const { open, toggle } = useNavbar();
 
@@ -13,13 +13,13 @@ export function Navbar() {
     <aside
       className={cn(
         "fixed left-0 top-0 h-screen bg-card border-r border-border transition-all duration-300 z-50",
-        open ? "w-64" : "w-20"
+        open ? "w-64" : "w-20",
       )}
     >
       <div className="p-4 flex items-center justify-between">
         {open && (
           <div className="flex items-center gap-2">
-            <img
+            <Image
               src="https://d2xsxph8kpxj0f.cloudfront.net/310519663597445204/PixyURvrA2Q8G3yP56DbCd/studyflow-logo-EymTwqP3GwU3JiLMGMCZZk.webp"
               alt="StudyFlow"
               className="w-8 h-8"
@@ -28,7 +28,11 @@ export function Navbar() {
           </div>
         )}
 
-        <button onClick={toggle} className="p-2 hover:bg-muted rounded-lg transition">
+        <button
+          type="button"
+          onClick={toggle}
+          className="p-2 hover:bg-muted rounded-lg transition"
+        >
           <Menu className="w-5 h-5" />
         </button>
       </div>
@@ -55,7 +59,10 @@ export function Navbar() {
           {open && <span className="text-sm">Settings</span>}
         </Link>
 
-        <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-destructive/10 transition text-destructive">
+        <button
+          type="button"
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-destructive/10 transition text-destructive"
+        >
           <LogOut className="w-5 h-5" />
           {open && <span className="text-sm">Logout</span>}
         </button>

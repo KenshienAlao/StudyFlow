@@ -1,5 +1,5 @@
-import { Input } from "@/components/ui";
-import { cn } from "@/lib";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import { Search, SlidersHorizontal } from "lucide-react";
 
 type SubHeaederProps = {
@@ -36,6 +36,7 @@ export function SubHeader({
         </div>
         {["all", "high", "medium", "low"].map((priority) => (
           <button
+            type="button"
             key={priority}
             onClick={() => setFilterPriority(priority)}
             className={cn(

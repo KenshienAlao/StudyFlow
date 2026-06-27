@@ -1,7 +1,8 @@
-import { API_ENDPOINTS } from "@/config";
-import { api } from "@/lib";
-import { ApiResponse, Profile } from "@/model";
-import { Setup, Update } from "@/validation";
+import { API_ENDPOINTS } from "@/config/api.config";
+import api from "@/lib/api";
+import { ApiResponse } from "@/model/api.model";
+import { Profile } from "@/model/profile.model";
+import { Setup, Update } from "@/validation/profile.validation";
 
 export const profileService = {
   get: (): Promise<ApiResponse<Profile>> =>

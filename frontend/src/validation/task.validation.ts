@@ -56,7 +56,7 @@ export const TaskUpdateSchema = z.object({
     .optional(),
 });
 
-export const NoteUpdateSchema = z.object({
+const NoteUpdateSchema = z.object({
   note: z.string().trim().optional(),
 });
 

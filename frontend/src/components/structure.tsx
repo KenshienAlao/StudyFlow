@@ -1,11 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import { ReactNode } from "react";
 import { Navbar } from "./navbar";
-import { cn } from "@/lib";
-import { useNavbar } from "@/provider";
+import { useNavbar } from "@/provider/navbar.provider";
+import { cn } from "@/lib/utils";
 
 interface DashboardLayoutProps {
   children: ReactNode;

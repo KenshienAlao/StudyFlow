@@ -1,9 +1,9 @@
-import { ApiResponse } from "@/model";
-import { taskService } from "@/service";
+import { ApiResponse } from "@/model/api.model";
+import { taskService } from "@/service/task.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-export const taskKey = {
+const taskKey = {
   task: ["task"] as const,
 };
 

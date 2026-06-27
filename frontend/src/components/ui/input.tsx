@@ -1,4 +1,4 @@
-import { useComposition } from "@/hooks";
+import { useComposition } from "@/hooks/use-composition";
 import { cn } from "@/lib/utils";
 import * as React from "react";
 
@@ -10,8 +10,11 @@ function Input({
   onCompositionEnd,
   ...props
 }: React.ComponentProps<"input">) {
-  const { onCompositionStart: cs, onCompositionEnd: ce, onKeyDown: kd } =
-    useComposition<HTMLInputElement>();
+  const {
+    onCompositionStart: cs,
+    onCompositionEnd: ce,
+    onKeyDown: kd,
+  } = useComposition<HTMLInputElement>();
 
   return (
     <input
@@ -20,7 +23,7 @@ function Input({
       className={cn(
         "h-9 w-full rounded-md border bg-transparent px-3 text-sm outline-none",
         "focus-visible:ring-2 focus-visible:ring-ring",
-        className
+        className,
       )}
       onCompositionStart={(e) => {
         cs(e);

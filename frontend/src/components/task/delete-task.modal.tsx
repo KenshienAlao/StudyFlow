@@ -1,6 +1,7 @@
 import { AlertCircle, Loader2, Trash2 } from "lucide-react";
-import { Button, Modal } from "@/components/ui";
-import { Task } from "@/model";
+import { Task } from "@/model/task.model";
+import { Modal } from "../ui/modal";
+import { Button } from "../ui/button";
 
 export interface DeleteConfirmationModalProps {
   openDeleteTask: Task | null;

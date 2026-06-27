@@ -18,8 +18,6 @@ export function Modal({
   children,
   disabled,
 }: ModalProps) {
-  const modalRef = useRef<HTMLDivElement | null>(null);
-
   if (!isOpen) return null;
 
   const handleClose = () => {
@@ -30,14 +28,15 @@ export function Modal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 drop-shadow-2xl">
-      <div
+      <button
+        aria-label="Close modal"
+        type="button"
         className="absolute inset-0 bg-background/40 backdrop-blur-md animate-fade-in"
         onClick={handleClose}
       />
 
-      <div
-        ref={modalRef}
-        role="dialog"
+      <dialog
+        aria-label="dialog"
         aria-modal="true"
         className="relative z-10 w-full max-w-lg overflow-hidden rounded-xl border border-border/80 bg-card shadow-xl animate-in fade-in-50 zoom-in-95"
       >
@@ -66,7 +65,7 @@ export function Modal({
         </div>
 
         {children}
-      </div>
+      </dialog>
     </div>
   );
 }

@@ -1,5 +1,5 @@
-import { cn } from "@/lib";
-import { Task } from "@/model";
+import { cn } from "@/lib/utils";
+import { Task } from "@/model/task.model";
 import { Activity, Sparkles, TrendingUp } from "lucide-react";
 
 type MetricsProps = {

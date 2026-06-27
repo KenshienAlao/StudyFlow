@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 
-import { API_ENDPOINTS } from "@/config";
+import { API_ENDPOINTS } from "@/config/api.config";
 
 const api = axios.create({
   withCredentials: true,

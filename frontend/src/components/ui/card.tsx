@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from "@/lib";
+import { cn } from "@/lib/utils";
 
 export function Card({
   className,
@@ -10,7 +10,7 @@ export function Card({
     <div
       className={cn(
         "bg-card text-card-foreground flex flex-col gap-4 rounded-xl border p-6 shadow-sm",
-        className
+        className,
       )}
       {...props}
     >

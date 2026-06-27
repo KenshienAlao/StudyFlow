@@ -9,9 +9,11 @@ import {
   CircleAlert,
 } from "lucide-react";
 
-import { Button, Input, Modal } from "@/components/ui";
 import { FormEvent } from "react";
-import { Task } from "@/model";
+import { Task } from "@/model/task.model";
+import { Modal } from "../ui/modal";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 type EditTaskModalProps = {
   openEditTask: Task | null;
@@ -56,7 +58,7 @@ export function EditTaskModal({
           )}
 
           <div className="space-y-1.5">
-            <label className={labelClass}>
+            <label htmlFor="task-title" className={labelClass}>
               <Bookmark className="size-3 text-primary/80" />
               Task Title
             </label>
@@ -69,7 +71,7 @@ export function EditTaskModal({
           </div>
 
           <div className="space-y-1.5">
-            <label className={labelClass}>
+            <label htmlFor="subject" className={labelClass}>
               <Layers className="size-3 text-primary/80" />
               Subject
             </label>
@@ -81,10 +83,9 @@ export function EditTaskModal({
             />
           </div>
 
-          {/* Adjusted Grid Structure for Cleaner Multi-Select Layout Positioning */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div className="space-y-1.5">
-              <label className={labelClass}>
+              <label htmlFor="priority-level" className={labelClass}>
                 <SlidersHorizontal className="size-3 text-primary/80" />
                 Priority Level
               </label>
@@ -128,11 +129,12 @@ export function EditTaskModal({
             </div>
 
             <div className="space-y-1.5">
-              <label className={labelClass}>
+              <label htmlFor="due-date" className={labelClass}>
                 <Calendar className="size-3 text-primary/80" />
                 Due Date
               </label>
               <Input
+                id="due-date"
                 name="due_date"
                 type="date"
                 defaultValue={
@@ -144,9 +146,8 @@ export function EditTaskModal({
               />
             </div>
 
-            {/* Redesigned Status Select Input Layout Field */}
             <div className="space-y-1.5">
-              <label className={labelClass}>
+              <label htmlFor="status" className={labelClass}>
                 <CircleAlert className="size-3 text-primary/80" />
                 Status
               </label>

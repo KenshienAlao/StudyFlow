@@ -1,7 +1,9 @@
-import { Input, Button, Modal } from "@/components/ui";
-import { Subject } from "@/model";
+import { Subject } from "@/model/subject.model";
 import { AlertCircle, Loader2, Edit2 } from "lucide-react";
 import { FormEvent } from "react";
+import { Modal } from "../ui/modal";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 export interface EditModalProps {
   subjectToEdit: Subject | null;
@@ -45,10 +47,14 @@ export function EditModal({
         >
           <fieldset disabled={isEditSubjectPending} className="space-y-4">
             <div>
-              <label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-1.5 block">
+              <label
+                htmlFor="edit-subject-name"
+                className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-1.5 block"
+              >
                 Subject Name
               </label>
               <Input
+                id="edit-subject-name"
                 name="name"
                 defaultValue={subjectToEdit?.name}
                 placeholder="e.g., Data Structures and Algorithms"
@@ -58,10 +64,14 @@ export function EditModal({
             </div>
 
             <div>
-              <label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-1.5 block">
+              <label
+                htmlFor="edit-subject-desc"
+                className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-1.5 block"
+              >
                 Description
               </label>
               <Input
+                id="edit-subject-desc"
                 name="description"
                 defaultValue={subjectToEdit?.description}
                 placeholder="e.g., Analysis of runtime complexities, core fundamental structures, and optimization methods"
@@ -70,11 +80,15 @@ export function EditModal({
             </div>
 
             <div>
-              <label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-2 block">
+              <label
+                htmlFor="edit-subject-color"
+                className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-2 block"
+              >
                 Accent Color
               </label>
               <div className="flex items-center gap-3 bg-muted/10 border border-border/60 rounded-md p-3">
                 <input
+                  id="edit-subject-color"
                   type="color"
                   name="color"
                   defaultValue={subjectToEdit?.color || "#6FAF8F"}

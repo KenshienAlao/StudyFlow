@@ -7,7 +7,7 @@ type Options<T> = {
 };
 
 export function useComposition<T extends HTMLElement = HTMLInputElement>(
-  options: Options<T> = {}
+  options: Options<T> = {},
 ) {
   const composing = useRef(false);
 

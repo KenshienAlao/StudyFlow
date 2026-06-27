@@ -1,7 +1,11 @@
-import { API_ENDPOINTS } from "@/config";
-import { api } from "@/lib";
-import { ApiResponse, Subject } from "@/model";
-import { SubjectCreate, SubjectUpdate } from "@/validation";
+import api from "@/lib/api";
+
+import { API_ENDPOINTS } from "@/config/api.config";
+
+import { ApiResponse } from "@/model/api.model";
+import { Subject } from "@/model/subject.model";
+
+import { SubjectCreate, SubjectUpdate } from "@/validation/subject.validation";
 
 export const subjectService = {
   get: (): Promise<ApiResponse<Subject[]>> =>

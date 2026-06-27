@@ -1,6 +1,6 @@
-import { Card } from "@/components/ui";
-import { cn } from "@/lib";
-import { Subject } from "@/model";
+import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { Subject } from "@/model/subject.model";
 import { BookOpen, MoreVertical, Edit2, Trash2 } from "lucide-react";
 
 interface SubjectCardProps {

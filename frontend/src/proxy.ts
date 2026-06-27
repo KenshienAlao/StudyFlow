@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse as Res } from "next/server";
-import { PUBLIC_ROUTES } from "./config";
+import { PUBLIC_ROUTES } from "./config/route.config";
 
 export function proxy(req: NextRequest) {
   const { nextUrl: url, cookies: c } = req;

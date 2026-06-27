@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import { APP_NAME, APP_DESCRIPTION } from "@/config";
-
-import { QueryProvider, ThemeProvider, NavbarProvider } from "@/provider";
 import { ToastContainer } from "react-toastify";
+import { APP_DESCRIPTION, APP_NAME } from "@/config/app.config";
+import { QueryProvider } from "@/provider/query.provider";
+import { ThemeProvider } from "@/provider/theme.provider";
+import { NavbarProvider } from "@/provider/navbar.provider";
 
 export const metadata: Metadata = {
   title: APP_NAME,

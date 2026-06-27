@@ -1,9 +1,9 @@
-import { ApiResponse } from "@/model";
+import { ApiResponse } from "@/model/api.model";
 import { subjectService } from "@/service/subject.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-export const subjectKey = {
+const subjectKey = {
   subject: ["subject"] as const,
 };
 

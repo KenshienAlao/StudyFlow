@@ -1,5 +1,7 @@
-import { Input, Button, Modal } from "@/components/ui";
 import { AlertCircle, Loader2, BookOpen } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Modal } from "@/components/ui/modal";
 
 type CreateSubjectModalProps = {
   isModalOpen: boolean;
@@ -38,10 +40,14 @@ export function CreateSubjectModal({
         <form onSubmit={handleCreateSubject} className="space-y-4">
           <fieldset disabled={isCreateSubjectPending} className="space-y-4">
             <div>
-              <label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-1.5 block">
+              <label
+                htmlFor="create-subject-name"
+                className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-1.5 block"
+              >
                 Subject Name
               </label>
               <Input
+                id="create-subject-name"
                 name="name"
                 placeholder="e.g., Data Structures and Algorithms"
                 required
@@ -50,10 +56,14 @@ export function CreateSubjectModal({
             </div>
 
             <div>
-              <label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-1.5 block">
+              <label
+                htmlFor="create-subject-desc"
+                className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-1.5 block"
+              >
                 Description
               </label>
               <Input
+                id="create-subject-desc"
                 name="description"
                 placeholder="e.g., Analysis of runtime complexities, core fundamental structures, and optimization methods"
                 className="h-9.5 border-border/60 bg-muted/10 text-xs shadow-xs transition-colors focus-visible:bg-transparent"
@@ -61,11 +71,15 @@ export function CreateSubjectModal({
             </div>
 
             <div>
-              <label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-2 block">
+              <label
+                htmlFor="create-subject-color"
+                className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-display mb-2 block"
+              >
                 Accent Color
               </label>
               <div className="flex items-center gap-3 bg-muted/10 border border-border/60 rounded-md p-3">
                 <input
+                  id="create-subject-color"
                   type="color"
                   name="color"
                   defaultValue="#6FAF8F"

@@ -1,6 +1,7 @@
 import { AlertCircle, Loader2, Trash2 } from "lucide-react";
-import { Button, Modal } from "@/components/ui";
-import { Subject } from "@/model";
+import { Subject } from "@/model/subject.model";
+import { Modal } from "../ui/modal";
+import { Button } from "../ui/button";
 
 export interface DeleteConfirmationModalProps {
   subjectToDelete: Subject | null;

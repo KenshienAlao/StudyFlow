@@ -1,5 +1,5 @@
 import * as SwitchPrimitive from "@radix-ui/react-switch";
-import { cn } from "@/lib";
+import { cn } from "@/lib/utils";
 
 export function Switch({
   className,
@@ -9,7 +9,7 @@ export function Switch({
     <SwitchPrimitive.Root
       className={cn(
         "peer inline-flex h-[1.15rem] w-8 items-center rounded-full border border-transparent shadow-xs outline-none transition-all data-[state=checked]:bg-primary data-[state=unchecked]:bg-input focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50",
-        className
+        className,
       )}
       {...props}
     >

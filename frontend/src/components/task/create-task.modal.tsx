@@ -9,8 +9,10 @@ import {
   FileText,
 } from "lucide-react";
 
-import { Button, Input, Modal } from "@/components/ui";
 import { FormEvent } from "react";
+import { Modal } from "../ui/modal";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 type CreateTaskModalProps = {
   isModalOpen: boolean;
@@ -52,7 +54,7 @@ export function CreateTaskModal({
           )}
 
           <div className="space-y-1.5">
-            <label className={labelClass}>
+            <label htmlFor="task-title" className={labelClass}>
               <Bookmark className="size-3 text-primary/80" />
               Task Title
             </label>
@@ -65,7 +67,7 @@ export function CreateTaskModal({
           </div>
 
           <div className="space-y-1.5">
-            <label className={labelClass}>
+            <label htmlFor="subject" className={labelClass}>
               <Layers className="size-3 text-primary/80" />
               Subject
             </label>
@@ -77,11 +79,13 @@ export function CreateTaskModal({
           </div>
 
           <div className="space-y-1.5">
-            <label className={labelClass}>
+            <label htmlFor="notes" className={labelClass}>
               <FileText className="size-3 text-primary/80" />
               Notes
             </label>
             <textarea
+              id="notes"
+              aria-label="note"
               name="note"
               rows={3}
               placeholder="Optional: Add context notes, operational details, or milestones specifications..."
@@ -91,13 +95,14 @@ export function CreateTaskModal({
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="space-y-1.5">
-              <label className={labelClass}>
+              <label htmlFor="priority-level" className={labelClass}>
                 <SlidersHorizontal className="size-3 text-primary/80" />
                 Priority Level
               </label>
 
               <div className="relative group">
                 <select
+                  id="priority-level"
                   name="priority"
                   defaultValue="none"
                   className="w-full h-9.5 appearance-none rounded-md border border-border/60 bg-muted/10 px-3 pr-8 text-xs text-foreground shadow-xs transition-colors focus:bg-transparent focus:outline-2 focus:outline-offset-2 focus:outline-ring/80 cursor-pointer font-medium"
@@ -134,11 +139,12 @@ export function CreateTaskModal({
               </div>
             </div>
             <div className="space-y-1.5">
-              <label className={labelClass}>
+              <label htmlFor="due-date" className={labelClass}>
                 <Calendar className="size-3 text-primary/80" />
                 Due Date
               </label>
               <Input
+                id="due-date"
                 name="due_date"
                 type="date"
                 className="h-9.5 border-border/60 bg-muted/10 text-xs shadow-xs transition-colors focus-visible:bg-transparent"
@@ -156,6 +162,7 @@ export function CreateTaskModal({
               Cancel
             </Button>
             <Button
+              aria-label="Create Task"
               type="submit"
               className="flex h-9 items-center gap-1.5 rounded-md px-4 text-xs font-semibold shadow-xs active:scale-[0.98]"
             >

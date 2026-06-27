@@ -7,15 +7,21 @@ function Dialog(props: React.ComponentProps<typeof DialogPrimitive.Root>) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />;
 }
 
-function DialogTrigger(props: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
+function DialogTrigger(
+  props: React.ComponentProps<typeof DialogPrimitive.Trigger>,
+) {
   return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />;
 }
 
-function DialogPortal(props: React.ComponentProps<typeof DialogPrimitive.Portal>) {
+function DialogPortal(
+  props: React.ComponentProps<typeof DialogPrimitive.Portal>,
+) {
   return <DialogPrimitive.Portal {...props} />;
 }
 
-function DialogClose(props: React.ComponentProps<typeof DialogPrimitive.Close>) {
+function DialogClose(
+  props: React.ComponentProps<typeof DialogPrimitive.Close>,
+) {
   return <DialogPrimitive.Close {...props} />;
 }
 
@@ -27,7 +33,7 @@ function DialogOverlay({
     <DialogPrimitive.Overlay
       className={cn(
         "fixed inset-0 z-50 bg-black/50 data-[state=open]:fade-in data-[state=closed]:fade-out",
-        className
+        className,
       )}
       {...props}
     />
@@ -49,7 +55,7 @@ function DialogContent({
       <DialogPrimitive.Content
         className={cn(
           "fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background p-6 shadow-lg",
-          className
+          className,
         )}
         {...props}
       >
@@ -85,7 +91,7 @@ function DialogFooter({
     <div
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className
+        className,
       )}
       {...props}
     />
@@ -93,18 +99,15 @@ function DialogFooter({
 }
 
 function DialogTitle(
-  props: React.ComponentProps<typeof DialogPrimitive.Title>
+  props: React.ComponentProps<typeof DialogPrimitive.Title>,
 ) {
   return (
-    <DialogPrimitive.Title
-      className={cn("text-lg font-semibold")}
-      {...props}
-    />
+    <DialogPrimitive.Title className={cn("text-lg font-semibold")} {...props} />
   );
 }
 
 function DialogDescription(
-  props: React.ComponentProps<typeof DialogPrimitive.Description>
+  props: React.ComponentProps<typeof DialogPrimitive.Description>,
 ) {
   return (
     <DialogPrimitive.Description

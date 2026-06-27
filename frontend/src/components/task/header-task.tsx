@@ -1,5 +1,5 @@
-import { Plus, FolderKanban } from "lucide-react";
-import { Button } from "@/components/ui";
+import { Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function Header({ setIsOpen }: { setIsOpen: (open: boolean) => void }) {
