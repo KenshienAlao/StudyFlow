@@ -36,6 +36,7 @@ export function Modal({
       />
 
       <dialog
+        open
         aria-label="dialog"
         aria-modal="true"
         className="relative z-10 w-full max-w-lg overflow-hidden rounded-xl border border-border/80 bg-card shadow-xl animate-in fade-in-50 zoom-in-95"

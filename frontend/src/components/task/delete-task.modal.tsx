@@ -28,7 +28,7 @@ export function DeleteTaskModal({
     >
       <div className="p-4 sm:p-5">
         <div className="text-sm text-muted-foreground mb-4">
-          Are you sure you want to permanently delete this record?
+          Are you sure you want to delete this task?
         </div>
 
         <div className="flex items-center gap-3 p-3 mb-4 rounded-xl bg-muted/10 border border-border/60">
